@@ -48,14 +48,18 @@
 
         <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
             android:id="@+id/am_progressbar_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:direction="right"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:background="@drawable/shape_oval"
+            app:direction="top"
             app:max_progress="100"
-            app:outside_color="#d91f1f"
+            app:progress_text_color="#ffffff"
+            app:progress_text_size="40sp"
+            app:inside_color="#000000"
+            app:outside_color="#d9d91f"
             app:outside_radius="80dp"
             app:progress="0"
-            app:progress_width="8dp" />
+            app:progress_width="6dp" />
 
         <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
             android:id="@+id/am_progressbar_four"

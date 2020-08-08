@@ -1,6 +1,7 @@
 package com.share.jack.customcircleprogressbar;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar;
@@ -25,7 +26,11 @@ public class MainActivity extends Activity {
         progressBarOne.setProgress(20);
         progressBarTwo.setProgress(40);
         progressBarThree.setProgress(60);
-        progressBarFour.setProgress(80);
+        //progressBarFour.setProgress(80);
+        progressBarFour.setProgress2(80);
+        progressBarFour.setPause(true);
+        progressBarThree.setPause(true);
+        progressBarThree.setBackgroundColor(Color.TRANSPARENT);
 
     }
 }

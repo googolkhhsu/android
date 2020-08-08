@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -27,7 +28,7 @@ import static android.graphics.Paint.Style.STROKE;
  */
 
 public class CustomCircleProgressBar extends View {
-
+    private boolean pause = false;
     private int outsideColor;    //进度的颜色
     private float outsideRadius;    //外圆半径大小
     private int insideColor;    //背景颜色
@@ -43,6 +44,10 @@ public class CustomCircleProgressBar extends View {
     private Rect rect;
 
     private ValueAnimator animator;
+
+    public void setPause(boolean pause) {
+        this.pause = pause;
+    }
 
     enum DirectionEnum {
         LEFT(0, 180.0f),
@@ -118,28 +123,37 @@ public class CustomCircleProgressBar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         int circlePoint = getWidth() / 2;
-        //第一步:画背景(即内层圆)
-        paint.setColor(insideColor); //设置圆的颜色
-        paint.setStyle(STROKE); //设置空心
-        paint.setStrokeWidth(progressWidth); //设置圆的宽度
-        paint.setAntiAlias(true);  //消除锯齿
-        canvas.drawCircle(circlePoint, circlePoint, outsideRadius, paint); //画出圆
+        int outsideRadius = (int) this.outsideRadius;
+        if (!pause) {
+            //第一步:画背景(即内层圆)
+            paint.setColor(insideColor); //设置圆的颜色
+            paint.setStyle(STROKE); //设置空心
+            paint.setStrokeWidth(progressWidth); //设置圆的宽度
+            paint.setAntiAlias(true);  //消除锯齿
+            canvas.drawCircle(circlePoint, circlePoint, outsideRadius, paint); //画出圆
 
-        //第二步:画进度(圆弧)
-        paint.setColor(outsideColor);  //设置进度的颜色
-        RectF oval = new RectF(circlePoint - outsideRadius, circlePoint - outsideRadius, circlePoint + outsideRadius, circlePoint + outsideRadius);  //用于定义的圆弧的形状和大小的界限
-        canvas.drawArc(oval, DirectionEnum.getDegree(direction), 360 * (progress / maxProgress), false, paint);  //根据进度画圆弧
+            //第二步:画进度(圆弧)
+            paint.setColor(outsideColor);  //设置进度的颜色
+            RectF oval = new RectF(circlePoint - outsideRadius, circlePoint - outsideRadius, circlePoint + outsideRadius, circlePoint + outsideRadius);  //用于定义的圆弧的形状和大小的界限
+            canvas.drawArc(oval, DirectionEnum.getDegree(direction), 360 * (progress / maxProgress), false, paint);  //根据进度画圆弧
 
-        //第三步:画圆环内百分比文字
-        rect = new Rect();
-        paint.setColor(progressTextColor);
-        paint.setTextSize(progressTextSize);
-        paint.setStrokeWidth(0);
-        progressText = getProgressText();
-        paint.getTextBounds(progressText, 0, progressText.length(), rect);
-        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
-        int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;  //获得文字的基准线
-        canvas.drawText(progressText, getMeasuredWidth() / 2 - rect.width() / 2, baseline, paint);
+            //第三步:画圆环内百分比文字
+            rect = new Rect();
+            paint.setColor(progressTextColor);
+            paint.setTextSize(progressTextSize);
+            paint.setStrokeWidth(0);
+            progressText = getProgressText();
+            paint.getTextBounds(progressText, 0, progressText.length(), rect);
+            Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+            int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;  //获得文字的基准线
+            canvas.drawText(progressText, getMeasuredWidth() / 2 - rect.width() / 2, baseline, paint);
+        } else {
+            Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.btn_stop);
+            assert d != null;
+            d.setBounds(circlePoint - outsideRadius, circlePoint - outsideRadius, circlePoint + outsideRadius, circlePoint + outsideRadius);
+            d.draw(canvas);
+        }
+        //Log.d("circle", "circlePoint="+circlePoint);
     }
 
     @Override
@@ -242,6 +256,11 @@ public class CustomCircleProgressBar extends View {
             progress = maxProgress;
         }
         startAnim(progress);
+    }
+
+    public void setProgress2(int progress) {
+        this.progress = progress;
+        invalidate();
     }
 
     private void startAnim(float startProgress) {
