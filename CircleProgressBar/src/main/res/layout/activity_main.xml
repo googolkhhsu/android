@@ -14,7 +14,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
+        <com.share.jack.customcircleprogressbar.widget.CircleProgressBar
             android:id="@+id/am_progressbar_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             app:progress="0"
             app:progress_width="2dp" />
 
-        <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
+        <com.share.jack.customcircleprogressbar.widget.CircleProgressBar
             android:id="@+id/am_progressbar_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
+        <com.share.jack.customcircleprogressbar.widget.CircleProgressBar
             android:id="@+id/am_progressbar_three"
             android:layout_width="180dp"
             android:layout_height="180dp"
@@ -61,7 +61,7 @@
             app:progress="0"
             app:progress_width="6dp" />
 
-        <com.share.jack.customcircleprogressbar.widget.CustomCircleProgressBar
+        <com.share.jack.customcircleprogressbar.widget.CircleProgressBar
             android:id="@+id/am_progressbar_four"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

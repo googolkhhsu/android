@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="CustomCircleProgressBar">
+    <declare-styleable name="CircleProgressBar">
         <attr name="outside_color" format="color" />
         <attr name="outside_radius" format="dimension" />
         <attr name="inside_color" format="color" />
