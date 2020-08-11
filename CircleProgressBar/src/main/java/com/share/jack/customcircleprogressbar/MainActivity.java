@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 
         progressBarOne.setProgress(20);
         progressBarTwo.setProgress(40);
-        progressBarThree.setProgress(60);
+        progressBarThree.setProgress(100);
         //progressBarFour.setProgress(80);
         progressBarFour.setProgress2(80);
         progressBarFour.setPause(true);

@@ -55,7 +55,7 @@
             app:max_progress="100"
             app:progress_text_color="#ffffff"
             app:progress_text_size="40sp"
-            app:inside_color="#000000"
+            app:inside_color="#00000000"
             app:outside_color="#d9d91f"
             app:outside_radius="80dp"
             app:progress="0"

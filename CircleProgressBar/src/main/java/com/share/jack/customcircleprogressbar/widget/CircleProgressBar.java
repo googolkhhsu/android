@@ -148,11 +148,14 @@ public class CircleProgressBar extends View {
             paint.setColor(progressTextColor);
             paint.setTextSize(progressTextSize);
             paint.setStrokeWidth(0);
-            progressText = getProgressText();
+            progressText = ""+ ((int) (progress / maxProgress * 100));//getProgressText();
             paint.getTextBounds(progressText, 0, progressText.length(), rect);
             Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
             int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;  //获得文字的基准线
             canvas.drawText(progressText, getMeasuredWidth() / 2 - rect.width() / 2, baseline, paint);
+            paint.setTextSize(progressTextSize/2);
+            int diff = progressText.length() >= 3 ? 180 : progressText.length() >= 2 ? 120 : 80;
+            canvas.drawText("%", getMeasuredWidth() / 2 - rect.width() / 2 + diff, baseline, paint);
         } else {
             Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.btn_stop);
             assert d != null;
