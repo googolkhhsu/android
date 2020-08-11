@@ -10,6 +10,8 @@
         <attr name="progress_width" format="dimension" />
         <attr name="max_progress" format="integer" />
         <attr name="progress" format="float" />
+        <attr name="pause_icon" format="reference"/>
+        <attr name="pause_icon_bound_diff" format="integer"/>
         <attr name="direction">
             <enum name="left" value="0" />
             <enum name="top" value="1" />

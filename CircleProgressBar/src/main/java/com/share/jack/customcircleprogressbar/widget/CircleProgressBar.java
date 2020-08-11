@@ -44,6 +44,8 @@ public class CircleProgressBar extends View {
 
     private ValueAnimator animator;
 
+    private Drawable pauseIcon;
+    private int pauseIconBoundDiff;
     private ProgressBar progressBar;
 
     public void setPause(boolean pause) {
@@ -114,6 +116,8 @@ public class CircleProgressBar extends View {
         progress = a.getFloat(R.styleable.CircleProgressBar_progress, 50.0f);
         maxProgress = a.getInt(R.styleable.CircleProgressBar_max_progress, 100);
         direction = a.getInt(R.styleable.CircleProgressBar_direction, 3);
+        pauseIcon = a.getDrawable(R.styleable.CircleProgressBar_pause_icon);
+        pauseIconBoundDiff = a.getInt(R.styleable.CircleProgressBar_pause_icon_bound_diff, 10);
 
         a.recycle();
 
@@ -157,10 +161,19 @@ public class CircleProgressBar extends View {
             int diff = progressText.length() >= 3 ? 180 : progressText.length() >= 2 ? 120 : 80;
             canvas.drawText("%", getMeasuredWidth() / 2 - rect.width() / 2 + diff, baseline, paint);
         } else {
-            Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.btn_stop);
-            assert d != null;
-            d.setBounds(circlePoint - outsideRadius, circlePoint - outsideRadius, circlePoint + outsideRadius, circlePoint + outsideRadius);
-            d.draw(canvas);
+            if (pauseIcon != null) {
+                int left, top, right, bottom;
+                left = circlePoint - outsideRadius + pauseIconBoundDiff;
+                top = circlePoint - outsideRadius + pauseIconBoundDiff;
+                right = circlePoint + outsideRadius - pauseIconBoundDiff;
+                bottom = circlePoint + outsideRadius - pauseIconBoundDiff;
+                pauseIcon.setBounds(left, top, right, bottom);
+                pauseIcon.draw(canvas);
+            }
+//            Drawable d = ContextCompat.getDrawable(getContext(), R.drawable.btn_stop);
+//            assert d != null;
+//            d.setBounds(circlePoint - outsideRadius, circlePoint - outsideRadius, circlePoint + outsideRadius, circlePoint + outsideRadius);
+//            d.draw(canvas);
         }
         //Log.d("circle", "circlePoint="+circlePoint);
     }

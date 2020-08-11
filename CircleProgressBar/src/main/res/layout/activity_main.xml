@@ -65,13 +65,16 @@
             android:id="@+id/am_progressbar_four"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#ffff00"
             android:layout_marginLeft="20dp"
             app:direction="bottom"
             app:max_progress="100"
             app:outside_color="#19e126"
             app:outside_radius="70dp"
             app:progress="0"
-            app:progress_width="6dp" />
+            app:progress_width="6dp"
+            app:pause_icon="@drawable/btn_stop"
+            app:pause_icon_bound_diff="40"/>
     </LinearLayout>
 
 </LinearLayout>
